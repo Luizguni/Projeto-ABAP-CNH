@@ -1,0 +1,42 @@
+REPORT ZCURSO_O08. " Declaração do programa
+
+" Tela de seleção com um campo de entrada para a categoria do veículo
+SELECTION-SCREEN BEGIN OF BLOCK b1.
+  PARAMETER p_cat(1) TYPE c. " Parâmetro de 1 caractere (categoria)
+SELECTION-SCREEN END OF BLOCK b1.
+
+" Início da lógica principal do programa
+START-OF-SELECTION.
+
+"DATA ld_descricao TYPE string. OUTRO EXEMPLO DE DECLARAÇÃO
+"WHEN 'A'.
+  "ld_descricao = 'MOTO'
+
+  " Verifica o valor inserido no parâmetro p_cat
+  CASE p_cat.
+
+    WHEN 'A'. " Categoria A: motos
+      WRITE 'MOTO'. " Exibe o tipo de veículo
+      SKIP.         " Pula uma linha na saída
+
+    WHEN 'B'. " Categoria B: veículos de carga leve ou transporte pequeno
+      WRITE 'CAMINHONETE/CARGO/MICRO-ÔNIBUS'. " Exibe o tipo de veículo
+      SKIP. " Pula uma linha na saída
+
+    WHEN 'C'. " Categoria C: veículos de carga pesada
+      WRITE 'CAMINHÃO/VEÍCULOS PESADOS'. " Exibe o tipo de veículo
+      SKIP. " Pula uma linha na saída
+
+     WHEN 'D'. " Categoria D: veículos de carga pesada plus
+      WRITE 'CAMINHÃO TRUCK/ÔNIBUS ARTICULADO'. " Exibe o tipo de veículo
+      SKIP. " Pula uma linha na saída
+
+    WHEN 'E'. " Categoria E: veículos de carga pesada especiais
+      WRITE 'CAMINHÃO ARTICULADO/MAQUINAS PESADAS E AGRÍCOLAS'. " Exibe o tipo de veículo
+      SKIP. " Pula uma linha na saída
+
+    WHEN OTHERS. " Qualquer valor diferente de A, B, C, D OU E
+      WRITE 'CATEGORIA INVÁLIDA!'. " Mensagem de erro
+      SKIP.
+
+  ENDCASE. " Fim do bloco condicional
